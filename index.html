@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ToDo- List</title>
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/app.css"/>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+	<script type="text/javascript" src="collection.js"></script>
+	<script type="text/javascript" src="components/navbar/navbar.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="controllers.js"></script>
+	<script type="text/javascript" src="states.js"></script>
+</head>
+<body ng-app="ToDoApp">
+	<div ng-controller="NavbarController as ctrl">
+		<navbar inverse="false" brand="ctrl.brand" menus="ctrl.menus"></navbar>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" ui-view>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
