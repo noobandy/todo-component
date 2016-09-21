@@ -7,8 +7,7 @@
 
 		$stateProvider.state("home", {
 			url: "/",
-			template: '<h4>Home</h4>',
-			controller: "ToDoListController"
+			template: '<todo-list></todo-list>'
 		}).state("about", {
 			url: "/about",
 			templateUrl: "partials/about.html"

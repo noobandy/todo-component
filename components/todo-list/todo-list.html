@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">ToDo List</div>
+			<div class="panel-body">
+    			<form novalidate name="taskAddForm" class="form-horizontal" ng-submit="taskAddForm.$valid && $ctrl.addTask()">
+    				<div class="form-group">
+    					<label class="control-label col-md-3">
+    						Task
+    					</label>
+    					<div class="col-md-9">
+    						<textarea required maxlength="140" rows="5" name="task" ng-model="$ctrl.todo.task" class="form-control"></textarea>
+    						<span ng-messages="taskAddForm.task.$error"  class="help-block">
+	    							<div ng-message="required">Task details is required.</div>
+	    							<div ng-message="maxlength">This field can be at most 140 characters long.</div>
+    						</span>
+    					</div>
+    				</div>
+    				<div class="form-group">
+    					<label class="control-label col-md-3">
+    						Due Date
+    					</label>
+    					<div class="col-md-9">
+    						<input required min="{{$ctrl.now}}" type="date" name="dueDate" ng-model="$ctrl.todo.dueDate" class="form-control" />
+    						<span ng-messages="taskAddForm.dueDate.$error"  class="help-block">
+	    							<div ng-message="required">Due date is required.</div>
+	    							<div ng-message="min">Due date must be a future date.</div>
+    						</span>
+    					</div>
+    				</div>
+    				<div class="form-group">
+    					<div class="col-md-9 col-md-offset-3">
+    						<button type="button" class="btn btn-danger" ng-click="$ctrl.clear(taskAddForm)">Clear</button>
+    						<button type="submit" class="btn btn-primary">Add Task</button>
+    					</div>
+    				</div>
+    			</form>
+  			</div>
+  			<!-- Task List -->
+  			<div class="btn-group.btn-group-justified">
+  				<button class="btn btn-primary" ng-click="$ctrl.changeFilter('all')" ng-class="{'active': $ctrl.activeFilter == 'all'}">
+  					All <span class="badge" ng-bind="$ctrl.filteredCount('all')"></span>
+  				</button>
+  				<button class="btn btn-warning" ng-click="$ctrl.changeFilter(false)" ng-class="{'active': $ctrl.activeFilter === true}">
+  					Pending <span class="badge" ng-bind="$ctrl.filteredCount(false)"></span>
+  				</button>
+  				<button class="btn btn-success" ng-click="$ctrl.changeFilter(true)" ng-class="{'active': $ctrl.activeFilter === false}">
+  					Completed <span class="badge" ng-bind="$ctrl.filteredCount(true)"></span>
+  				</button>
+  			</div>
+  			<div class="list-group">
+  				<div class="list-group-item" ng-repeat="todo in $ctrl.todos | filter:$ctrl.filter track by todo.id">
+				<span ng-switch="todo.completed">
+					<form ng-switch-when="true">
+						<div class="form-group">
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox" ng-model="todo.completed" disabled="disabled" />
+									<strike>{{todo.task}}</strike>
+								</label>
+							</div>
+						</div>
+					</form>
+					<form ng-switch-when="false">
+						<div class="form-group">
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox" ng-model="todo.completed" type="form-control" ng-change="$ctrl.completeTask(todo)" /> {{todo.task}} <br/>due by {{todo.dueDate | date}}.
+								</label>
+							</div>
+						</div>
+					</form>		
+				</span>
+  			</div>
+  			</div>
+  		</div>
+	</div>
+</div>

@@ -18,7 +18,7 @@
 		};
 
 		LocalStorage.prototype.setItem = function(key, item) {
-			var itemValueAsString = JSON.stringify(item, function(key, value) {
+			var itemValueAsString = JSON.stringify(item/*, function(key, value) {
 				if(typeof key === 'string' && value instanceof Date) {
 					return {
 						type: "date",
@@ -27,7 +27,7 @@
 				} else {
 					return value;
 				}
-			});
+			}*/);
 
 			ls.setItem(this.namespace+"."+key, itemValueAsString);
 
